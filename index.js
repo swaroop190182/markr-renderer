@@ -20,6 +20,7 @@ app.post('/render', async (req, res) => {
   try {
     console.log('[renderer] Starting:', url)
     browser = await chromium.launch({
+      executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium-browser',
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -48,5 +49,5 @@ app.post('/render', async (req, res) => {
   }
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 8080
 app.listen(PORT, () => console.log(`Markr renderer running on port ${PORT}`))
