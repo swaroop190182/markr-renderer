@@ -1,11 +1,7 @@
-FROM ubuntu:22.04
-
-ENV DEBIAN_FRONTEND=noninteractive
+FROM node:22-slim
 
 RUN apt-get update && apt-get install -y \
-    nodejs \
-    npm \
-    chromium-browser \
+    chromium \
     libglib2.0-0 \
     libnss3 \
     libatk1.0-0 \
@@ -26,7 +22,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-ENV CHROMIUM_PATH=/usr/bin/chromium-browser
+ENV CHROMIUM_PATH=/usr/bin/chromium
 ENV PORT=8080
 
 EXPOSE 8080
